@@ -44,3 +44,15 @@ type Block struct {
 	// The hash of the next block
 	Nextblockhash string `json:"nextblockhash"`
 }
+
+type BlockChainInfo struct {
+	Chain                string  `json:"chain"`
+	Blocks               uint64  `json:"blocks"`
+	Headers              uint64  `json:"headers"`
+	BestBlockHash        string  `json:"bestblockhash"`
+	Difficulty           float64 `json::"difficulty"`
+	MedianTime           uint64  `json:"mediantime"`
+	VerificationProgress float64 `json:"verificationprogress"`
+	ChainWork            string  `json:"chainwork"`
+	Pruned               bool    `json:"pruned"`
+}

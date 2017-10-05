@@ -117,6 +117,15 @@ func (b *Bitcoind) GetBlock(blockHash string) (block Block, err error) {
 	return
 }
 
+func (b *Bitcoind) GetBlockChainInfo() (info BlockChainInfo, err error) {
+	r, err := b.client.call("getblockchaininfo", nil)
+	if err = handleError(err, &r); err != nil {
+		return
+	}
+	err = json.Unmarshal(r.Result, &info)
+	return
+}
+
 // GetBlockCount returns the number of blocks in the longest block chain.
 func (b *Bitcoind) GetBlockCount() (count uint64, err error) {
 	r, err := b.client.call("getblockcount", nil)
@@ -343,6 +352,15 @@ func (b *Bitcoind) GetTxOutsetInfo() (txOutSet TransactionOutSet, err error) {
 		return
 	}
 	err = json.Unmarshal(r.Result, &txOutSet)
+	return
+}
+
+func (b *Bitcoind) GetWalletInfo() (walletinfo WalletInfo, err error) {
+	r, err := b.client.call("getwalletinfo", nil)
+	if err = handleError(err, &r); err != nil {
+		return
+	}
+	err = json.Unmarshal(r.Result, &walletinfo)
 	return
 }
 
